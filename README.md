@@ -223,7 +223,7 @@ DELETE /livro/{id}:
 
 ### Configuration
 
-Create a `.env` file at the project's root with the following variables:
+Create a `.env` file at the project's resources/ with the following variables:
 
 ```plaintext
 DB_NAME=your_database_name
