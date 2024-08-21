@@ -1,15 +1,14 @@
-package com.book_library.models;
+package com.book_library.domain.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,9 +17,11 @@ public class BookModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String titulo;
-    private String autor;
-    private String genero;
-    private int ano;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private String author;
+    private String genre;
+    private String isbn;
+
+    @Column(unique = true)
+    private String title;
+    private int publicationYear;
 }

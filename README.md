@@ -1,6 +1,6 @@
 # Book Library
 
-This repository hosts the Livro Application project, developed as part of my studies at T-Academy. This project is a Spring Boot application that manages a book catalog, allowing [CRUD](https://pt.wikipedia.org/wiki/CRUD) operations.
+This repository hosts the Book Application project, developed as part of my studies at T-Academy. This project is a Spring Boot application that manages a book catalog, allowing [CRUD](https://pt.wikipedia.org/wiki/CRUD) operations.
 
 ## Central Repository
 
@@ -21,14 +21,14 @@ The central repository for this project can be found on GitHub: [T-Academy](http
 <details>
 <summary>List All Books</summary>
 
-- **Endpoint**: `GET /livro`
+- **Endpoint**: `GET /books`
 - **Description**: Retrieves a paginated and sorted list of all books in the catalog.
 - **Parameters**:
     - `page` (optional): The page number (default: `1`).
     - `size` (optional): The number of items per page (default: `10`).
     - `sortBy` (optional): The field to sort by (default: `createdAt`).
 - **Response**:
-    - `200 OK`: Returns a paginated list of `LivroDTO` objects.
+    - `200 OK`: Returns a paginated list of `BookDTO` objects.
     - **Headers**:
         - `X-Total-Pages`: Total number of pages.
         - `X-Total-Elements`: Total number of elements.
@@ -36,7 +36,7 @@ The central repository for this project can be found on GitHub: [T-Academy](http
         - `X-Page-Size`: Number of items per page.
 
 ```yaml
-GET /livro:
+GET /books:
   summary: "List All Books"
   parameters:
     - in: query
@@ -76,20 +76,20 @@ GET /livro:
 <details>
 <summary>Search Books by Genre</summary>
 
-**Endpoint**: `GET /livro/genero/{genero}`  
+**Endpoint**: `GET /books/genre/{genre}`  
 **Description**: Retrieves a list of books filtered by the specified genre.  
 **Parameters**:
-- `genero` (path): The genre to filter books by.  
+- `genre` (path): The genre to filter books by.  
   **Response**:
-- `200 OK`: Returns a list of `LivroDTO` objects that match the specified genre.
+- `200 OK`: Returns a list of `BookDTO` objects that match the specified genre.
 - `404 Not Found`: If no books are found for the specified genre.
 
 ```yaml
-GET /livro/genero/{genero}:
+GET /books/genre/{genre}:
   summary: "Search Books by Genre"
   parameters:
     - in: path
-      name: genero
+      name: genre
       required: true
       schema:
         type: string
@@ -104,23 +104,23 @@ GET /livro/genero/{genero}:
 <details>
 <summary>Add a New Book</summary>
 
-**Endpoint**: `POST /livro`  
+**Endpoint**: `POST /books`  
 **Description**: Inserts a new book into the catalog.  
 **Request Body**:
-- `LivroDTO`: Object containing the details of the book (e.g., title, author, genre, year).  
+- `BookDTO`: Object containing the details of the book (e.g., title, author, genre, year).  
   **Response**:
-- `201 Created`: Returns the created `LivroDTO` object with a `Location` header indicating the URL of the newly created book.
+- `201 Created`: Returns the created `BookDTO` object with a `Location` header indicating the URL of the newly created book.
 - `Location` header: URI of the newly created book.
 
 ```yaml
-POST /livro:
+POST /books:
   summary: "Add a New Book"
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '#/components/schemas/LivroDTO'
+          $ref: '#/components/schemas/BookDTO'
   responses:
     '201':
       description: "Book created successfully"
@@ -135,18 +135,18 @@ POST /livro:
 <details>
 <summary>Update an Existing Book</summary>
 
-**Endpoint**: `PUT /livro/{id}`  
+**Endpoint**: `PUT /books/{id}`  
 **Description**: Updates the information of an existing book.  
 **Parameters**:
 - `id` (path): The UUID of the book to update.  
   **Request Body**:
-- `LivroUpdateDTO`: Object containing the updated details of the book.  
+- `BookUpdateDTO`: Object containing the updated details of the book.  
   **Response**:
-- `200 OK`: Returns the updated `LivroDTO` object.
+- `200 OK`: Returns the updated `BookDTO` object.
 - `404 Not Found`: If the book with the specified ID is not found.
 
 ```yaml
-PUT /livro/{id}:
+PUT /books/{id}:
   summary: "Update an Existing Book"
   parameters:
     - in: path
@@ -160,7 +160,7 @@ PUT /livro/{id}:
     content:
       application/json:
         schema:
-          $ref: '#/components/schemas/LivroUpdateDTO'
+          $ref: '#/components/schemas/BookUpdateDTO'
   responses:
     '200':
       description: "Book updated successfully"
@@ -172,7 +172,7 @@ PUT /livro/{id}:
 <details>
 <summary>Delete a Book</summary>
 
-**Endpoint**: `DELETE /livro/{id}`  
+**Endpoint**: `DELETE /books/{id}`  
 **Description**: Removes a book from the catalog.  
 **Parameters**:
 - `id` (path): The UUID of the book to delete.  
@@ -181,7 +181,7 @@ PUT /livro/{id}:
 - `404 Not Found`: If the book with the specified ID is not found.
 
 ```yaml
-DELETE /livro/{id}:
+DELETE /books/{id}:
   summary: "Delete a Book"
   parameters:
     - in: path
